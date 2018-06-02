@@ -17,13 +17,11 @@ prepare_transformation <- function(dataColumn, numSlices, type) {
   if (! type %in% list('even', 'size')) {
     return(NULL)
   }
+  tresholds = c()
+  number_of_examples = length(dataColumn)
   if (type == 'even') {
-    tresholds = c()
-    number_of_examples = length(dataColumn)
     # we assume that data domain is fully enclosed between max and min values
     slice_size = (max(dataColumn) - min(dataColumn)) / numSlices
-    number_of_examples = length(dataColumn)
-    sorted = sort(dataColumn)
     current_index = 0
     currTreshold = min(dataColumn) + slice_size
     
@@ -31,8 +29,25 @@ prepare_transformation <- function(dataColumn, numSlices, type) {
         tresholds[i] = currTreshold
         currTreshold = currTreshold + slice_size
       }
-    return(tresholds)
   }
+  
+  else if (type == 'size') {
+    slice_size = as.integer(length(dataColumn) / numSlices)
+    sorted = sort(dataColumn)
+    current_index = 0
+    curr_slice_size = slice_size
+    
+    for (i in 1:length(dataColumn)) {
+      if (curr_slice_size == 0) {
+        tresholds = c(tresholds, sorted[i])
+        curr_slice_size = slice_size
+      }
+      else {
+        curr_slice_size = curr_slice_size - 1
+      }
+    }
+  }
+  return(tresholds)
 }
 
 
