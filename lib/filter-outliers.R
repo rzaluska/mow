@@ -51,7 +51,7 @@ index_exits <- function(index, data) {
 # irisf <- iris[l,]
 #
 apply_transformation <- function(data, beta, quadrils) {
-  logica_mask <- rep(T, nrow(data))
+  logical_mask <- rep(T, nrow(data))
   q1 <- quadrils[[1]]
   q3 <- quadrils[[2]]
   for (i in 1:nrow(data)) {
@@ -59,13 +59,13 @@ apply_transformation <- function(data, beta, quadrils) {
       if (index_exits(j, q1) && index_exits(j, q3)) {
         if (data[i,j] > q3[[j]] + beta * (q3[[j]] - q1[[j]])) {
           # too big value
-          logica_mask[i] <- logica_mask[i] & FALSE
+          logical_mask[i] <- logical_mask[i] & FALSE
         }
         if (data[i,j] < q1[[j]] - beta * (q3[[j]] - q1[[j]])) {
-          logica_mask[i] <- logica_mask[i] & FALSE
+          logical_mask[i] <- logical_mask[i] & FALSE
         }
       }
     }
   }
-  return(logica_mask)
+  return(logical_mask)
 }
