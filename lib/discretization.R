@@ -55,7 +55,7 @@ prepare_transformation <- function(data, columnIndices, columnOptions) {
         }
       }
     }
-    tresholds[[k]] = list(c(as.integer(columnIndices[k])),col_tresholds)
+    tresholds[[columnIndices[k]]] = col_tresholds
   }
   return(tresholds)
   }
@@ -70,25 +70,24 @@ prepare_transformation <- function(data, columnIndices, columnOptions) {
 #' @export
 #'
 #' @examples
-#'  t = prepare_transformation(iris, c(1,2), list(list(5, 'even'),list(5, 'size')))
+#'  t = prepare_transformation(iris, c(1,2), list(list(5, 'even'),list(6, 'size')))
 #'  transformed = apply_transformation(iris, t)
 apply_transformation <- function(data, thresholds) {
   d = cbind(data)
   for (i in 1:nrow(data)) {
     for (j in 1:ncol(data)) {
-      for (k in 1:length(thresholds)) {
-        t = thresholds[[k]]
-        col_id = t[[1]]
-        if (col_id == j) {
-          th = t[[2]]
-          d[i, j] = as.integer(length(th) + 1);
-          for (l in 1:length(th)) {
-            if (data[i, j] < th[l]) {
-              d[i, j] = as.integer(l) # we assume that discrete values are based on thresholds indices
-              break;
+      if (j <= length(thresholds)) {
+        t = thresholds[[j]]
+        if (!is.null(t)) {
+            d[i, j] = as.integer(length(t) + 1);
+            if (!is.null(t)) { # it t is null then we have only 1 slice
+              for (l in 1:length(t)) {
+                if (data[i, j] < t[l]) {
+                  d[i, j] = as.integer(l) # we assume that discrete values are based on thresholds indices
+                  break;
+                }
+              }
             }
-          }
-          break;
         }
       }
     }
