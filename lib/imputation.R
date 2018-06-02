@@ -9,7 +9,7 @@ prepare_transformation <- function(data, columnIndices, columnOptions) {
      val = NA
      not_NA = data[!is.na(data[, col_i]), col_i]
      if (option == "average") {
-      val = sum(not_NA) / length(not_NA)
+      val = mean(not_NA)
      } else if (option == "median") {
       val = median(not_NA)
      } else if (option == "mode") {
