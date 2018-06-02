@@ -1,6 +1,13 @@
-#
-# prepare_tranformation
-#
+#' prepare_transformation
+#'
+#' @param data 
+#' @param columnIndices 
+#'
+#' @return list of (average, std) values per column selected in columnIndices
+#' @export
+#'
+#' @examples
+#' p = prepare_transformation(iris, c(1))
 prepare_transformation <- function(data, columnIndices) {
   transformation_parameters = list()
   for (i in 1:length(columnIndices)) {
@@ -14,10 +21,19 @@ prepare_transformation <- function(data, columnIndices) {
   return(transformation_parameters)
 }
 
-
-#
-# apply_tranformation
-#
+#' apply_transformation
+#'
+#' @param data 
+#' @param transformation_parameters - paramets obtained from prepare_transformation
+#'
+#' @return data with column values replaced by new ones with mean = 0 and std = 1
+#' @export
+#'
+#' @examples
+#' p = prepare_transformation(iris, c(1))
+#' r = apply_transformation(iris, p)
+#' mean(r[,1]) -> 0
+#' sd(r[, 1]) -> 1
 apply_transformation <- function(data, transformation_parameters) {
   data_copy = data
   for (i in 1:length(transformation_parameters)) {

@@ -1,6 +1,12 @@
-#
-# prepare_tranformation - computes first and third quadrile for all columns or columns selected in columnIndices
-#
+#' prepare_transformation
+#'
+#' @param data 
+#' @param columnIndices - columns selected for transformation
+#'
+#' @return first and third quadrile values per column
+#' @export
+#'
+#' @examples
 prepare_transformation <- function(data, columnIndices) {
   cols_first_q <- list()
   cols_third_q <- list()
@@ -42,14 +48,21 @@ index_exits <- function(index, data) {
   }
   return(TRUE)
 }
+
 #
-# apply_tranformation
-# smaller beta - more agresive filtering
-# to filter just apply
-# q <- prepare_transformation(iris, columnIndices = c(1,2,3,4))
-# l <- apply_transformation(iris, 0.1, q)
-# irisf <- iris[l,]
-#
+#' apply_tranformation - removes rows where one of values in outliners columnts meets filtering criteria
+#'
+#' @param data 
+#' @param beta - smaller beta - more agresive filtering
+#' @param quadrils 
+#'
+#' @return
+#' @export
+#'
+#' @examples
+#' q <- prepare_transformation(iris, columnIndices = c(1,2,3,4))
+#' l <- apply_transformation(iris, 0.1, q)
+#' irisf <- iris[l,]
 apply_transformation <- function(data, beta, quadrils) {
   logical_mask <- rep(T, nrow(data))
   q1 <- quadrils[[1]]
