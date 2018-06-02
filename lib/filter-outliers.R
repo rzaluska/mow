@@ -44,6 +44,11 @@ index_exits <- function(index, data) {
 }
 #
 # apply_tranformation
+# smaller beta - more agresive filtering
+# to filter just apply
+# q <- prepare_transformation(iris, columnIndices = c(1,2,3,4))
+# l <- apply_transformation(iris, 0.1, q)
+# irisf <- iris[l,]
 #
 apply_transformation <- function(data, beta, quadrils) {
   logica_mask <- rep(T, nrow(data))
