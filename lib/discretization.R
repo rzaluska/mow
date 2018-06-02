@@ -15,7 +15,7 @@
 #' t = prepare_transformation(iris[,1], 5, 'size')
 prepare_transformation <- function(dataColumn, numSlices, type) {
   if (! type %in% list('even', 'size')) {
-    return(NULL)
+    stop("Wrong type param: ", type, ". Use 'even' or 'size'")
   }
   tresholds = c()
   number_of_examples = length(dataColumn)
@@ -48,18 +48,6 @@ prepare_transformation <- function(dataColumn, numSlices, type) {
     }
   }
   return(tresholds)
-}
-
-
-index_exits <- function(index, data) {
-  if (index > length(data)) {
-    return(FALSE)
-  }
-  
-  if (is.null(data[[index]])) {
-    return(FALSE)
-  }
-  return(TRUE)
 }
 
 #' Title
