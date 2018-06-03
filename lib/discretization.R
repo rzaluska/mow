@@ -28,7 +28,6 @@ discretization.prepare <- function(data, columnIndices, columnOptions) {
     if (type == 'even') {
       # we assume that data domain is fully enclosed between max and min values
       slice_size = (max(dataColumn) - min(dataColumn)) / numSlices
-      current_index = 0
       currTreshold = min(dataColumn) + slice_size
       
       for (i in 1:(numSlices-1)) {
