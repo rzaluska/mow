@@ -1,4 +1,4 @@
-#' prepare_transformation
+#' binary_coding.prepare
 #'
 #' @param data 
 #' @param columnIndices - columns selected for transformation
@@ -7,7 +7,7 @@
 #' @export
 #'
 #' @examples
-prepare_transformation <- function(data, columnIndices) {
+binary_coding.prepare <- function(data, columnIndices) {
   transformation_parameters = list()
   for (i in 1:length(columnIndices)) {
     col_i = columnIndices[i]
@@ -21,7 +21,7 @@ prepare_transformation <- function(data, columnIndices) {
 }
 
 
-#' apply_transformation
+#' binary_coding.apply
 #'
 #' @param data 
 #' @param transformation_parameters - paramets obtained from prepare_transformation
@@ -30,9 +30,9 @@ prepare_transformation <- function(data, columnIndices) {
 #' @export
 #'
 #' @examples
-#' t = prepare_transformation(iris, c(5))
-#' apply_transformation(iris, t) -> add 2 new colums binary representing 3 classes
-apply_transformation <- function(data, transformation_parameters) {
+#' t = binary_coding.prepare(iris, c(5))
+#' binary_coding.apply(iris, t) -> add 2 new colums binary representing 3 classes
+binary_coding.apply <- function(data, transformation_parameters) {
   data_copy = data
   for (i in 1:length(transformation_parameters)) {
     col_i = transformation_parameters[[i]][[1]]
@@ -53,6 +53,6 @@ letters[2,1] = "A"
 letters[3,1] = "B"
 letters[4,1] = "C"
 letters[5,1] = "D"
-p = prepare_transformation(letters, c(1))
-after = apply_transformation(letters, p)
+p = binary.coding.prepare(letters, c(1))
+after = binary.coding.apply(letters, p)
 after

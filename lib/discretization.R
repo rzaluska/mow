@@ -1,5 +1,4 @@
-# 
-#' compute discreatization thresholds - prepare_transformation
+#' discretization.prepare - compute discreatization thresholds
 #'
 #' @param data
 #' @param columnIndices
@@ -13,8 +12,8 @@
 #' @export
 #'
 #' @examples
-#' t = prepare_transformation(iris, c(1,2), list(list(5, 'even'),list(5, 'size')))
-prepare_transformation <- function(data, columnIndices, columnOptions) {
+#' t = discretization.prepare(iris, c(1,2), list(list(5, 'even'),list(5, 'size')))
+discretization.prepare <- function(data, columnIndices, columnOptions) {
   tresholds = c()
   for (k in 1:length(columnIndices)) {
     dataColumn = data[,columnIndices[k]]
@@ -61,18 +60,18 @@ prepare_transformation <- function(data, columnIndices, columnOptions) {
   }
   
 
-#' Title
+#' discretization.apply
 #'
 #' @param dataColumn 
 #' @param thresholds values computed by prepare_transformation function
 #'
-#' @return dataColumn with discrete values
+#' @return data with discrete values
 #' @export
 #'
 #' @examples
-#'  t = prepare_transformation(iris, c(1,2), list(list(5, 'even'),list(6, 'size')))
-#'  transformed = apply_transformation(iris, t)
-apply_transformation <- function(data, thresholds) {
+#'  t = discretization.prepare(iris, c(1,2), list(list(5, 'even'),list(6, 'size')))
+#'  transformed = discretization.apply(iris, t)
+discretization.apply <- function(data, thresholds) {
   d = cbind(data)
   for (i in 1:nrow(data)) {
     for (k in 1:length(thresholds)) {

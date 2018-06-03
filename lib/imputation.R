@@ -1,4 +1,4 @@
-#' prepare_transformation
+#' inputation.prepare
 #'
 #' @param data 
 #' @param columnIndices - select columns you want to process
@@ -15,8 +15,8 @@
 #' fil = seq(from=1, to=150, by=2)
 #' iris_c[fil, 1:2] = NA
 #' iris_c[fil, 5] = NA
-#' p = prepare_transformation(iris_c, c(1, 2, 5),  c("average", "median", "mode"))
-prepare_transformation <- function(data, columnIndices, columnOptions) {
+#' p = inputation.prepare(iris_c, c(1, 2, 5),  c("average", "median", "mode"))
+inputation.prepare <- function(data, columnIndices, columnOptions) {
   transformation_parameters = list()
   for (i in 1:length(columnIndices)) {
      col_i = columnIndices[i]
@@ -40,7 +40,7 @@ prepare_transformation <- function(data, columnIndices, columnOptions) {
 
 
 
-#' apply_transformation
+#' inputation.apply
 #'
 #' @param data 
 #' @param transformation_parameters - paramets obtainded from prepare_transformation function
@@ -52,9 +52,9 @@ prepare_transformation <- function(data, columnIndices, columnOptions) {
 #' iris_c = iris
 #' fil = seq(from=1, to=150, by=2)
 #' iris_c[fil, 1:2] = NA
-#' p = prepare_transformation(iris_c, c(1, 2),  c("average", "median"))
-#' after1 = apply_transformation(iris_c, p)
-apply_transformation <- function(data, transformation_parameters) {
+#' p = inputation.prepare(iris_c, c(1, 2),  c("average", "median"))
+#' after1 = inputation.apply(iris_c, p)
+inputation.apply <- function(data, transformation_parameters) {
   data_copy = data
   for (i in 1:length(transformation_parameters)) {
     col_i = transformation_parameters[[i]][[1]]
@@ -70,8 +70,8 @@ apply_transformation <- function(data, transformation_parameters) {
 iris_c = iris
 fil = seq(from=1, to=150, by=2)
 iris_c[fil, 1:2] = NA
-p = prepare_transformation(iris_c, c(1, 2),  c("average", "median"))
-after1 = apply_transformation(iris_c, p)
+p = inputation.prepare(iris_c, c(1, 2),  c("average", "median"))
+after1 = inputation.apply(iris_c, p)
 after1[1:10,]
 
 letters = matrix(NA, nrow=5, ncol=1)
@@ -79,6 +79,6 @@ letters[1,] = "A"
 letters[2,] = "A"
 letters[3,] = "B"
 letters[4,] = "C"
-p2 = prepare_transformation(letters, c(1), c("mode"))
-after2 = apply_transformation(letters, p2)
+p2 = inputation.prepare(letters, c(1), c("mode"))
+after2 = inputation.apply(letters, p2)
 after2
