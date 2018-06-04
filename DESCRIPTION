@@ -1,0 +1,8 @@
+Package: mow
+Type: Package
+Title: R data preprocessing functions - University Project.
+Version: 0.1.0
+Author: Radosław Załuska, Konrad Czarnota
+Encoding: UTF-8
+LazyData: true
+RoxygenNote: 6.0.1

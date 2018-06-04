@@ -29,19 +29,19 @@ discretization.prepare <- function(data, columnIndices, columnOptions) {
       # we assume that data domain is fully enclosed between max and min values
       slice_size = (max(dataColumn) - min(dataColumn)) / numSlices
       currTreshold = min(dataColumn) + slice_size
-      
+
       for (i in 1:(numSlices-1)) {
         col_tresholds[i] = currTreshold
         currTreshold = currTreshold + slice_size
       }
     }
-    
+
     else if (type == 'size') {
       slice_size = as.integer(length(dataColumn) / numSlices)
       sorted = sort(dataColumn)
       current_index = 1
       curr_slice_size = slice_size
-      
+
       for (i in 1:length(dataColumn)) {
         if (curr_slice_size == 0) {
           col_tresholds[current_index] = sorted[i]
@@ -57,14 +57,14 @@ discretization.prepare <- function(data, columnIndices, columnOptions) {
   }
   return(tresholds)
   }
-  
 
-#' discretization.apply
+
+#' discretization.apply - apply discreatization intervals to data
 #'
-#' @param dataColumn 
-#' @param thresholds values computed by prepare_transformation function
+#' @param data
+#' @param thresholds - values computed by discretization.prepare function
 #'
-#' @return data with discrete values
+#' @return data with continuous values replaced with discrete values
 #' @export
 #'
 #' @examples

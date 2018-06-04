@@ -1,7 +1,7 @@
-#' standarization.prepare
+#' standarization.prepare - compute mean and std for columns
 #'
-#' @param data 
-#' @param columnIndices 
+#' @param data
+#' @param columnIndices
 #'
 #' @return list of (average, std) values per column selected in columnIndices
 #' @export
@@ -17,14 +17,14 @@ standarization.prepare <- function(data, columnIndices) {
     std = sd(not_NA)
     transformation_parameters[[i]] = list(col_i, avg, std)
   }
-  
+
   return(transformation_parameters)
 }
 
-#' standarization.apply
+#' standarization.apply - standarize data in selected columns
 #'
-#' @param data 
-#' @param transformation_parameters - paramets obtained from prepare_transformation
+#' @param data
+#' @param transformation_parameters - paramets obtained from standarization.prepare
 #'
 #' @return data with column values replaced by new ones with mean = 0 and std = 1
 #' @export
@@ -32,7 +32,7 @@ standarization.prepare <- function(data, columnIndices) {
 #' @examples
 #' p = prepare_transformation(iris, c(1))
 #' r = apply_transformation(iris, p)
-#' mean(r[,1]) -> 0
+#' mean(r[, 1]) -> 0
 #' sd(r[, 1]) -> 1
 standarization.apply <- function(data, transformation_parameters) {
   data_copy = data
@@ -42,7 +42,7 @@ standarization.apply <- function(data, transformation_parameters) {
     std = transformation_parameters[[i]][[3]]
     data_copy[, col_i] = (data_copy[, col_i] - avg)/std
   }
-  
+
   return(data_copy)
 }
 

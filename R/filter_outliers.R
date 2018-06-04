@@ -1,6 +1,6 @@
 #' filter_outliners.prepare - compute first and third quadrile values per column
 #'
-#' @param data 
+#' @param data
 #' @param columnIndices - columns selected for transformation
 #'
 #' @return first and third quadrile values per column
@@ -11,9 +11,9 @@
 filter_outliners.prepare <- function(data, columnIndices) {
   cols_first_q <- list()
   cols_third_q <- list()
-  
+
   used_cols_ids <- list()
-  
+
   k <- 1
   for (i in names(data)) {
     col_id = which(colnames(data)==i)
@@ -26,16 +26,16 @@ filter_outliners.prepare <- function(data, columnIndices) {
         k = k + 1
       }
   }
-  
+
   for (i in used_cols_ids) {
     col <- data[,i]
     q1 <- quantile(col, 0.25)[[1]]
     q3 <- quantile(col, 0.75)[[1]]
-    
+
     cols_first_q[i] <- q1
     cols_third_q[i] <- q3
   }
-  
+
   return(list(cols_first_q, cols_third_q))
 }
 
@@ -43,7 +43,7 @@ index_exits <- function(index, data) {
   if (index > length(data)) {
     return(FALSE)
   }
-  
+
   if (is.null(data[[index]])) {
     return(FALSE)
   }
@@ -53,9 +53,9 @@ index_exits <- function(index, data) {
 
 #' filter_outliners.apply - removes rows where one of values in outliners columns meets filtering criteria
 #'
-#' @param data 
+#' @param data
 #' @param beta - smaller beta - more agresive filtering
-#' @param quadrils 
+#' @param quadrils obtained from filter_outliners.prepare function
 #'
 #' @return
 #' @export
