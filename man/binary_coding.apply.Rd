@@ -4,10 +4,12 @@
 \alias{binary_coding.apply}
 \title{binary_coding.apply - add new binary values columns to data}
 \usage{
-binary_coding.apply(data, transformation_parameters)
+binary_coding.apply(data, transformation_parameters, replace = F)
 }
 \arguments{
-\item{transformation_parameters}{- paramets obtained from prepare_transformation}
+\item{transformation_parameters}{- paramets obtained from binary_coding.prepare}
+
+\item{replace}{- replace exisiting columns with new ones (default False)}
 }
 \value{
 data with added binary columns

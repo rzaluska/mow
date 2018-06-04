@@ -5,6 +5,14 @@ err <- function(y.true, y.pred) { sum(y.pred!=y.true)/length(y.true) }
 
 summary(Glass)
 
+type = 'even'
+size = 5
+
+d <- discretization.prepare(Glass, seq(9),
+                            list(list(size, type),list(size, type),list(size, type), list(size, type),list(size, type),
+                                 list(size, type),list(size, type),list(size, type),list(size, type)))
+summary(discretization.apply(Glass, d))
+
 v <- runif(nrow(Glass))
 train <- Glass[v>=0.2,]
 test <- Glass[v<0.2,]
@@ -13,16 +21,17 @@ err(test$Type, predict(tree1, test, type="class"))
 b <- naiveBayes(Type ~., train)
 err(test$Type, predict(b, test, type="class"))
 
-type = 'size'
+type = 'even'
 size = 10
 
-d <- discretization.prepare(train, c(1,2,3,4,5,6,7,8),
-                       list(list(size, type),list(size, type), list(size, type),list(size, type),
+d <- discretization.prepare(train,seq(9),
+                       list(list(size, type),list(size, type),
+                       list(size, type), list(size, type),list(size, type),
                        list(size, type),list(size, type),list(size, type),list(size, type)))
 
-train <- discretization.apply(train, d)
-test <- discretization.apply(test, d)
-tree1 <- rpart(Type ~., train)
-err(test$Type, predict(tree1, test, type="class"))
-b <- naiveBayes(Type ~., train)
-err(test$Type, predict(b, test, type="class"))
+train2 <- discretization.apply(train, d)
+test2 <- discretization.apply(test, d)
+tree1 <- rpart(Type ~., train2)
+err(test$Type, predict(tree1, test2, type="class"))
+b <- naiveBayes(Type ~., train2)
+err(test$Type, predict(b, test2, type="class"))

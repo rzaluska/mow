@@ -3,8 +3,6 @@ data("Sonar")
 
 err <- function(y.true, y.pred) { sum(y.pred!=y.true)/length(y.true) }
 
-summary(Sonar)
-
 mean(Sonar[,1])
 sd(Sonar[,1])
 
@@ -18,17 +16,17 @@ v <- runif(nrow(Sonar))
 train <- Sonar[v>=0.2,]
 test <- Sonar[v<0.2,]
 
-svm <- svm(Class ~ ., train)
+s <- svm(Class ~ ., train, kernel="linear")
 
-err(test$Class, predict(svm, test))
+err(test$Class, predict(s, test))
 
 s <- standarization.prepare(train, seq(1,60))
 train <- standarization.apply(train, s)
 test <- standarization.apply(test, s)
 
-svm <- svm(Class ~ ., train)
+s <- svm(Class ~ ., train, kernel="linear")
 
-err(test$Class, predict(svm, test))
+err(test$Class, predict(s, test))
 
 data("Satellite")
 
@@ -38,15 +36,15 @@ v <- runif(nrow(Satellite))
 train <- Satellite[v>=0.2,]
 test <- Satellite[v<0.2,]
 
-svm <- svm(classes ~ ., train)
+s <- svm(classes ~ ., train, kernel="linear")
 
-err(test$classes, predict(svm, test))
+err(test$classes, predict(s, test))
 
 s <- standarization.prepare(train, seq(1,36))
 train <- standarization.apply(train, s)
 test <- standarization.apply(test, s)
 
-svm <- svm(classes ~ ., train)
+s <- svm(classes ~ ., train, kernel="linear")
 
-err(test$classes, predict(svm, test))
+err(test$classes, predict(s, test))
 

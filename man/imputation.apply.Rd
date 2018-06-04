@@ -7,7 +7,7 @@
 imputation.apply(data, transformation_parameters)
 }
 \arguments{
-\item{transformation_parameters}{- paramets obtainded from prepare_transformation function}
+\item{transformation_parameters}{- paramets obtainded from imputation.prepare function}
 }
 \value{
 data with NA values set based on transformation_parameters

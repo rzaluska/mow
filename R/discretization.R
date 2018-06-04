@@ -77,16 +77,22 @@ discretization.apply <- function(data, thresholds) {
         t = thresholds[[k]]
         j = t[[1]]
         th = t[[2]]
-        d[i, j] = as.integer(length(th) + 1);
+        d[i, j] = as.double(length(th) + 1);
         if (!is.null(th)) { # it th is null then we have only 1 slice
             for (l in 1:length(th)) {
-              if (data[i, j] < th[l]) {
-                d[i, j] = as.integer(l) # we assume that discrete values are based on thresholds indices
+              if (data[i, j] <= th[l]) {
+                d[i, j] = as.double(l) # we assume that discrete values are based on thresholds indices
                 break;
               }
             }
-          }
+        }
+
       }
-    }
+  }
+  for (k in 1:length(thresholds)) {
+    t = thresholds[[k]]
+    j = t[[1]]
+    d[,j] <- factor(d[, j])
+  }
   return(d)
 }

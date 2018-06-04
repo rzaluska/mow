@@ -9,7 +9,7 @@ filter_outliners.apply(data, beta, quadrils)
 \arguments{
 \item{beta}{- smaller beta - more agresive filtering}
 
-\item{quadrils}{}
+\item{quadrils}{obtained from filter_outliners.prepare function}
 }
 \description{
 filter_outliners.apply - removes rows where one of values in outliners columns meets filtering criteria

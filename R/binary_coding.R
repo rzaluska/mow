@@ -40,9 +40,9 @@ binary_coding.apply <- function(data, transformation_parameters, replace=F) {
     col_i = transformation_parameters[[i]][[1]]
     all_vals = transformation_parameters[[i]][[2]]
     col_name = transformation_parameters[[i]][[3]]
-    data_copy[paste(col_name, all_vals, sep='')] = 0
+    data_copy[paste(col_name, all_vals, sep='')] = as.integer(0)
     for (n in all_vals) {
-      data_copy[data[, col_i] == n, paste(col_name, n, sep='')] = 1
+      data_copy[data[, col_i] == n, paste(col_name, n, sep='')] = as.integer(1)
     }
 
     if (replace) {

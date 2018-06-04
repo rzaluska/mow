@@ -7,7 +7,7 @@
 standarization.apply(data, transformation_parameters)
 }
 \arguments{
-\item{transformation_parameters}{- paramets obtained from prepare_transformation}
+\item{transformation_parameters}{- paramets obtained from standarization.prepare}
 }
 \value{
 data with column values replaced by new ones with mean = 0 and std = 1
