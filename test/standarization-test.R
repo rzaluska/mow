@@ -1,3 +1,13 @@
+# testing
+iris_c = iris
+fil = seq(from=1, to=150, by=2)
+iris_c[fil, 1] = NA
+iris_c[1:10,]
+p = standarization.prepare(iris_c, c(1))
+p[[1]]
+after1 = standarization.apply(iris_c, p)
+after1[1:10,]
+
 library(e1071)
 data("Sonar")
 

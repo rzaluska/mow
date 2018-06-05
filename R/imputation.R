@@ -1,4 +1,4 @@
-#' imputation.prepare - compute mean, median or mode for selected columns
+#' imputation.prepare - compute mean, median or mode for selected columns, this values can be used to fill missing values
 #'
 #' @param data
 #' @param columnIndices - select columns you want to process
@@ -40,10 +40,11 @@ imputation.prepare <- function(data, columnIndices, columnOptions) {
 
 
 
-#' imputation.apply - fill data gaps with values computed by inputation.prepare
+#' imputation.apply - fill data gaps (NA valuse) with values computed by inputation.prepare
 #'
 #' @param data
 #' @param transformation_parameters - paramets obtainded from imputation.prepare function
+#' @param mark_artificial_vals - for all columns with missing values add new column and mark artificial values in it (default False)
 #'
 #' @return data with NA values set based on transformation_parameters
 #' @export
@@ -54,31 +55,18 @@ imputation.prepare <- function(data, columnIndices, columnOptions) {
 #' iris_c[fil, 1:2] = NA
 #' p = inputation.prepare(iris_c, c(1, 2),  c("average", "median"))
 #' after1 = inputation.apply(iris_c, p)
-imputation.apply <- function(data, transformation_parameters) {
-  data_copy = data
+imputation.apply <- function(data, transformation_parameters, mark_artificial_vals = F) {
+  data_copy = as.data.frame(data)
   for (i in 1:length(transformation_parameters)) {
     col_i = transformation_parameters[[i]][[1]]
     val = transformation_parameters[[i]][[2]]
     data_copy[which(is.na(data[, col_i])), col_i] = val
+    if (mark_artificial_vals) {
+      col_name = colnames(data_copy)[col_i]
+      data_copy[which(!is.na(data[, col_i])), paste(col_name, "a", sep='')] = F
+      data_copy[which(is.na(data[, col_i])), paste(col_name, "a", sep='')] = T
+    }
   }
 
   return(data_copy)
 }
-
-# testing
-# I will put NA values in iris, NULL doesn't work here
-iris_c = iris
-fil = seq(from=1, to=150, by=2)
-iris_c[fil, 1:2] = NA
-p = imputation.prepare(iris_c, c(1, 2),  c("average", "median"))
-after1 = imputation.apply(iris_c, p)
-after1[1:10,]
-
-letters = matrix(NA, nrow=5, ncol=1)
-letters[1,] = "A"
-letters[2,] = "A"
-letters[3,] = "B"
-letters[4,] = "C"
-p2 = imputation.prepare(letters, c(1), c("mode"))
-after2 = imputation.apply(letters, p2)
-after2

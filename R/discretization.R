@@ -86,7 +86,6 @@ discretization.apply <- function(data, thresholds) {
               }
             }
         }
-
       }
   }
   for (k in 1:length(thresholds)) {

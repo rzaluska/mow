@@ -2,18 +2,20 @@
 % Please edit documentation in R/imputation.R
 \name{imputation.apply}
 \alias{imputation.apply}
-\title{imputation.apply - fill data gaps with values computed by inputation.prepare}
+\title{imputation.apply - fill data gaps (NA valuse) with values computed by inputation.prepare}
 \usage{
-imputation.apply(data, transformation_parameters)
+imputation.apply(data, transformation_parameters, mark_artificial_vals = F)
 }
 \arguments{
 \item{transformation_parameters}{- paramets obtainded from imputation.prepare function}
+
+\item{mark_artificial_vals}{- for all columns with missing values add new column and mark artificial values in it (default False)}
 }
 \value{
 data with NA values set based on transformation_parameters
 }
 \description{
-imputation.apply - fill data gaps with values computed by inputation.prepare
+imputation.apply - fill data gaps (NA valuse) with values computed by inputation.prepare
 }
 \examples{
 iris_c = iris

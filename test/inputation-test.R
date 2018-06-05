@@ -1,3 +1,19 @@
+# testing
+iris_c = iris
+fil = seq(from=1, to=150, by=2)
+iris_c[fil, 1:2] = NA
+p = imputation.prepare(iris_c, c(1, 2),  c("average", "median"))
+after1 = imputation.apply(iris_c, p)
+after1[1:10,]
+
+letters = matrix(NA, nrow=5, ncol=1)
+letters[1,] = "A"
+letters[2,] = "A"
+letters[3,] = "B"
+letters[4,] = "C"
+p2 = imputation.prepare(letters, c(1), c("mode"))
+imputation.apply(letters, p2, mark_artificial_vals = T)
+
 data("HouseVotes84") # moda z tego
 summary(HouseVotes84)
 nrow(HouseVotes84)

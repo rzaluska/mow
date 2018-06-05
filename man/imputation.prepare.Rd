@@ -2,7 +2,7 @@
 % Please edit documentation in R/imputation.R
 \name{imputation.prepare}
 \alias{imputation.prepare}
-\title{imputation.prepare - compute mean, median or mode for selected columns}
+\title{imputation.prepare - compute mean, median or mode for selected columns, this values can be used to fill missing values}
 \usage{
 imputation.prepare(data, columnIndices, columnOptions)
 }
@@ -15,7 +15,7 @@ imputation.prepare(data, columnIndices, columnOptions)
 - 'mode'}
 }
 \description{
-imputation.prepare - compute mean, median or mode for selected columns
+imputation.prepare - compute mean, median or mode for selected columns, this values can be used to fill missing values
 }
 \examples{
 iris_c = iris

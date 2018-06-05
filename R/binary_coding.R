@@ -53,14 +53,3 @@ binary_coding.apply <- function(data, transformation_parameters, replace=F) {
 
   return(data_copy)
 }
-
-# testing
-letters = iris[1:5, 1:2]
-letters[1,1] = "A"
-letters[2,1] = "A"
-letters[3,1] = "B"
-letters[4,1] = "C"
-letters[5,1] = "D"
-p = binary_coding.prepare(letters, c(1))
-after = binary_coding.apply(letters, p)
-after

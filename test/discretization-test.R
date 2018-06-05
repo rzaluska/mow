@@ -21,7 +21,7 @@ err(test$Type, predict(tree1, test, type="class"))
 b <- naiveBayes(Type ~., train)
 err(test$Type, predict(b, test, type="class"))
 
-type = 'even'
+type = 'size'
 size = 10
 
 d <- discretization.prepare(train,seq(9),
