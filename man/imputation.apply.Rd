@@ -4,12 +4,12 @@
 \alias{imputation.apply}
 \title{imputation.apply - fill data gaps (NA valuse) with values computed by inputation.prepare}
 \usage{
-imputation.apply(data, transformation_parameters, mark_artificial_vals = F)
+imputation.apply(data, transformation_parameters, mark_artificial_values = F)
 }
 \arguments{
 \item{transformation_parameters}{- paramets obtainded from imputation.prepare function}
 
-\item{mark_artificial_vals}{- for all columns with missing values add new column and mark artificial values in it (default False)}
+\item{mark_artificial_values}{- for all columns with missing values add new column and mark artificial values in it (default False)}
 }
 \value{
 data with NA values set based on transformation_parameters

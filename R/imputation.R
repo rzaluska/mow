@@ -44,7 +44,7 @@ imputation.prepare <- function(data, columnIndices, columnOptions) {
 #'
 #' @param data
 #' @param transformation_parameters - paramets obtainded from imputation.prepare function
-#' @param mark_artificial_vals - for all columns with missing values add new column and mark artificial values in it (default False)
+#' @param mark_artificial_values - for all columns with missing values add new column and mark artificial values in it (default False)
 #'
 #' @return data with NA values set based on transformation_parameters
 #' @export
@@ -55,13 +55,13 @@ imputation.prepare <- function(data, columnIndices, columnOptions) {
 #' iris_c[fil, 1:2] = NA
 #' p = inputation.prepare(iris_c, c(1, 2),  c("average", "median"))
 #' after1 = inputation.apply(iris_c, p)
-imputation.apply <- function(data, transformation_parameters, mark_artificial_vals = F) {
+imputation.apply <- function(data, transformation_parameters, mark_artificial_values = F) {
   data_copy = as.data.frame(data)
   for (i in 1:length(transformation_parameters)) {
     col_i = transformation_parameters[[i]][[1]]
     val = transformation_parameters[[i]][[2]]
     data_copy[which(is.na(data[, col_i])), col_i] = val
-    if (mark_artificial_vals) {
+    if (mark_artificial_values) {
       col_name = colnames(data_copy)[col_i]
       data_copy[which(!is.na(data[, col_i])), paste(col_name, "a", sep='')] = F
       data_copy[which(is.na(data[, col_i])), paste(col_name, "a", sep='')] = T

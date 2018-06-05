@@ -12,7 +12,7 @@ letters[2,] = "A"
 letters[3,] = "B"
 letters[4,] = "C"
 p2 = imputation.prepare(letters, c(1), c("mode"))
-imputation.apply(letters, p2, mark_artificial_vals = T)
+imputation.apply(letters, p2, mark_artificial_values = T)
 
 data("HouseVotes84") # moda z tego
 summary(HouseVotes84)
